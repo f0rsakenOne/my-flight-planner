@@ -1,4 +1,4 @@
-package com.example.myflightplanner.Security;
+package com.example.myflightplanner.security;
 
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
