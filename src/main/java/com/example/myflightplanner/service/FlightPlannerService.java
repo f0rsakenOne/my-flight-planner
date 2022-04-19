@@ -22,4 +22,12 @@ public class FlightPlannerService {
   public ResponseEntity<Flight> addFlight(@RequestBody Flight flight) {
     return flightsRepository.addFlight(flight);
   }
+
+  public ResponseEntity<Flight> fetchFlight(int id){
+    return flightsRepository.fetchFlight(id);
+  }
+
+  public ResponseEntity<Flight> deleteFlight(int id){
+    return flightsRepository.deleteFlight(id);
+  }
 }
