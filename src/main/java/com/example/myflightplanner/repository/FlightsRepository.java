@@ -52,5 +52,24 @@ public class FlightsRepository {
     return arrivalDate.isBefore(departureDate) || arrivalDate.isEqual(departureDate);
   }
 
+  public ResponseEntity<Flight> fetchFlight(int id){
+    if (checkIfPresent(id)){
+      return new ResponseEntity<>(getFlightById(id),HttpStatus.OK);
+    }
+    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+  }
+
+  public ResponseEntity<Flight> deleteFlight(int id){
+    flightList.removeIf(flight -> flight.getId()==id);
+    return new ResponseEntity<>(HttpStatus.OK);
+  }
+
+  private boolean checkIfPresent(int id){
+    return flightList.stream().anyMatch(flight -> flight.getId()==id);
+  }
+
+  private Flight getFlightById(int id){
+    return (Flight) flightList.stream().map(Flight::getId).filter(integer -> integer==id);
+  }
 
 }
