@@ -2,14 +2,13 @@ package com.example.myflightplanner.service;
 
 import com.example.myflightplanner.models.Flight;
 import com.example.myflightplanner.repository.FlightsRepository;
-import org.springframework.http.ResponseEntity;
+import com.example.myflightplanner.request.AddFlightRequest;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Service
 public class FlightPlannerService {
 
-  private final FlightsRepository flightsRepository;
+  private  FlightsRepository flightsRepository;
 
   public FlightPlannerService(FlightsRepository flightsRepository) {
     this.flightsRepository = flightsRepository;
@@ -19,15 +18,20 @@ public class FlightPlannerService {
     flightsRepository.clear();
   }
 
-  public ResponseEntity<Flight> addFlight(@RequestBody Flight flight) {
-    return flightsRepository.addFlight(flight);
+  public int getNewId() {
+    return flightsRepository.getNewId();
   }
 
-  public ResponseEntity<Flight> fetchFlight(int id){
+  public void addFlight(Flight flight) {
+    flightsRepository.addFlight(flight);
+  }
+
+
+  public Flight fetchFlight(int id) {
     return flightsRepository.fetchFlight(id);
   }
 
-  public ResponseEntity<Flight> deleteFlight(int id){
-    return flightsRepository.deleteFlight(id);
+  public void deleteFlight(int id) {
+    flightsRepository.deleteFlight(id);
   }
 }
