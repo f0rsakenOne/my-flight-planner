@@ -48,4 +48,10 @@ public class Airport {
         && this.city.trim().equalsIgnoreCase(airport.city.trim())
         && this.airport.trim().equalsIgnoreCase(airport.airport.trim());
   }
+
+  public boolean containsPhrase(String phrase) {
+    return this.country.toLowerCase().trim().contains(phrase.toLowerCase().trim())
+        || this.city.toLowerCase().trim().contains(phrase.toLowerCase().trim())
+        || this.airport.toLowerCase().trim().contains(phrase.toLowerCase().trim());
+  }
 }
