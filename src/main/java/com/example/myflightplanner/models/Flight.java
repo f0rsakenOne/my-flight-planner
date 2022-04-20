@@ -1,37 +1,36 @@
 package com.example.myflightplanner.models;
 
-import java.util.Objects;
-import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import java.time.LocalDateTime;
 
 public class Flight {
 
-  private int id;
-
-  @Valid
-  @NotNull
+  private Integer id;
   private Airport from;
-
-  @Valid
-  @NotNull
   private Airport to;
-
-  @NotBlank
   private String carrier;
 
-  @NotBlank
-  private String departureTime;
+  @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+  private LocalDateTime departureTime;
 
-  @NotBlank
-  private String arrivalTime;
+  @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+  private LocalDateTime arrivalTime;
 
+  public Flight(int id, Airport from, Airport to, String carrier,
+      LocalDateTime departureTime, LocalDateTime arrivalTime) {
+    this.id = id;
+    this.from = from;
+    this.to = to;
+    this.carrier = carrier;
+    this.departureTime = departureTime;
+    this.arrivalTime = arrivalTime;
+  }
 
-  public int getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(int id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
@@ -59,39 +58,31 @@ public class Flight {
     this.carrier = carrier;
   }
 
-  public String getDepartureTime() {
+  public LocalDateTime getDepartureTime() {
     return departureTime;
   }
 
-  public void setDepartureTime(String departureTime) {
+  public void setDepartureTime(LocalDateTime departureTime) {
     this.departureTime = departureTime;
   }
 
-  public String getArrivalTime() {
+  public LocalDateTime getArrivalTime() {
     return arrivalTime;
   }
 
-  public void setArrivalTime(String arrivalTime) {
+  public void setArrivalTime(LocalDateTime arrivalTime) {
     this.arrivalTime = arrivalTime;
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    Flight flight = (Flight) o;
-    return Objects.equals(from, flight.from) && Objects.equals(to, flight.to)
-        && Objects.equals(carrier, flight.carrier) && Objects.equals(
-        departureTime, flight.departureTime) && Objects.equals(arrivalTime,
-        flight.arrivalTime);
+  public boolean equals(Flight flight) {
+    return this.from.equals(flight.from)
+        && this.to.equals(flight.to)
+        && this.carrier.equals(flight.carrier)
+        && this.departureTime.equals(flight.departureTime)
+        && this.arrivalTime.equals(flight.arrivalTime);
   }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(from, to, carrier, departureTime, arrivalTime);
+  public boolean isBadDates() {
+    return arrivalTime.isBefore(departureTime) || arrivalTime.isEqual(departureTime);
   }
 }
