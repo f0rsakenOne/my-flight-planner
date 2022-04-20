@@ -1,5 +1,6 @@
 package com.example.myflightplanner.repository;
 
+import com.example.myflightplanner.models.Airport;
 import com.example.myflightplanner.models.Flight;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +44,11 @@ public class FlightsRepository {
 
   public void deleteFlight(int id) {
     flightList.removeIf(flight -> flight.getId().equals(id));
+  }
+
+  public List<Airport> searchAirports(String phrase) {
+    return flightList.stream().map(Flight::getFrom)
+        .filter(airport -> airport.containsPhrase(phrase)).toList();
   }
 
 }
