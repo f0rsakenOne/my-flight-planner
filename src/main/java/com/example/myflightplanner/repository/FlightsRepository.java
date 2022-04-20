@@ -2,6 +2,8 @@ package com.example.myflightplanner.repository;
 
 import com.example.myflightplanner.models.Airport;
 import com.example.myflightplanner.models.Flight;
+import com.example.myflightplanner.models.PageResult;
+import com.example.myflightplanner.models.SearchFlight;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.http.HttpStatus;
@@ -51,4 +53,8 @@ public class FlightsRepository {
         .filter(airport -> airport.containsPhrase(phrase)).toList();
   }
 
+  public PageResult getSearchedFlights(SearchFlight searchFlight) {
+    List<Flight> list =  flightList.stream().filter(searchFlight::equalsToFlight).toList();
+    return new PageResult(list);
+  }
 }
