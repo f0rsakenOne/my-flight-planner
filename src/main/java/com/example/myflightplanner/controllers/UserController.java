@@ -4,7 +4,7 @@ import com.example.myflightplanner.models.Airport;
 import com.example.myflightplanner.models.Flight;
 import com.example.myflightplanner.models.PageResult;
 import com.example.myflightplanner.request.SearchFlightRequest;
-import com.example.myflightplanner.service.FlightPlannerService;
+import com.example.myflightplanner.service.UserService;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -20,28 +20,29 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("api")
 public class UserController {
-  private final FlightPlannerService flightPlannerService;
+  private final UserService userService;
 
-  public UserController(FlightPlannerService flightPlannerService) {
-    this.flightPlannerService = flightPlannerService;
+  public UserController(UserService userService) {
+    this.userService = userService;
   }
+
 
   @GetMapping("airports")
   @ResponseStatus(HttpStatus.OK)
   public List<Airport> searchAirports(@RequestParam("search") String search) {
-    return flightPlannerService.searchAirports(search);
+    return userService.searchAirports(search);
   }
 
   @PostMapping("flights/search")
   @ResponseStatus(HttpStatus.OK)
   public PageResult getSearchedFlights(@Valid @RequestBody SearchFlightRequest searchFlightRequest) {
-    return flightPlannerService.getSearchedFlights(searchFlightRequest.toDomain());
+    return userService.getSearchedFlights(searchFlightRequest.toDomain());
   }
 
   @GetMapping("flights/{id}")
   @ResponseStatus(HttpStatus.OK)
-  public Flight fetchFlight(@PathVariable("id") int id) {
-    return flightPlannerService.fetchFlight(id);
+  public Flight fetchFlight(@PathVariable("id") String id) {
+    return userService.fetchFlight(id);
   }
 
 }

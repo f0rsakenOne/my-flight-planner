@@ -1,6 +1,6 @@
 package com.example.myflightplanner.controllers;
 
-import com.example.myflightplanner.service.FlightPlannerService;
+import com.example.myflightplanner.service.TestingService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/testing-api")
 public class TestingController {
 
-  private final FlightPlannerService flightPlannerService;
+  private final TestingService testingService;
 
-  private TestingController(FlightPlannerService flightPlannerService) {
-    this.flightPlannerService = flightPlannerService;
+  public TestingController(TestingService testingService) {
+    this.testingService = testingService;
   }
 
   @PostMapping("/clear")
   public void clear() {
-    flightPlannerService.clear();
+    testingService.clear();
   }
 }
