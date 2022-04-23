@@ -11,33 +11,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 @Service
-public class FlightPlannerService {
+public class UserService {
 
   private final FlightsRepository flightsRepository;
 
-  public FlightPlannerService(FlightsRepository flightsRepository) {
+  public UserService(FlightsRepository flightsRepository) {
     this.flightsRepository = flightsRepository;
-  }
-
-  public void clear() {
-    flightsRepository.clear();
-  }
-
-  public int getNewId() {
-    return flightsRepository.getNewId();
-  }
-
-  public void addFlight(Flight flight) {
-    flightsRepository.addFlight(flight);
-  }
-
-
-  public Flight fetchFlight(int id) {
-    return flightsRepository.fetchFlight(id);
-  }
-
-  public void deleteFlight(int id) {
-    flightsRepository.deleteFlight(id);
   }
 
   public List<Airport> searchAirports(String phrase) {
@@ -50,4 +29,9 @@ public class FlightPlannerService {
     }
     return flightsRepository.getSearchedFlights(searchFlight);
   }
+
+  public Flight fetchFlight(String id) {
+    return flightsRepository.fetchFlight(id);
+  }
+
 }

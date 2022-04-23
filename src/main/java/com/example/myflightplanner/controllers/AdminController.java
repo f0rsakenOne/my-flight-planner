@@ -2,7 +2,7 @@ package com.example.myflightplanner.controllers;
 
 import com.example.myflightplanner.models.Flight;
 import com.example.myflightplanner.request.AddFlightRequest;
-import com.example.myflightplanner.service.FlightPlannerService;
+import com.example.myflightplanner.service.AdminService;
 import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,27 +18,27 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/admin-api")
 public class AdminController {
 
-  private final FlightPlannerService flightPlannerService;
+  private final AdminService adminService;
 
-  public AdminController(FlightPlannerService flightPlannerService) {
-    this.flightPlannerService = flightPlannerService;
+  public AdminController(AdminService adminService) {
+    this.adminService = adminService;
   }
 
   @PutMapping("flights")
   @ResponseStatus(HttpStatus.CREATED)
   public Flight addFlight(@Valid @RequestBody AddFlightRequest flightRequest) {
-    Flight flight = flightRequest.toDomain(flightPlannerService.getNewId());
-    flightPlannerService.addFlight(flight);
+    Flight flight = flightRequest.toDomain(adminService.getNewId());
+    adminService.addFlight(flight);
     return flight;
   }
 
   @GetMapping("flights/{id}")
-  public Flight fetchFlight(@PathVariable("id") int id) {
-    return flightPlannerService.fetchFlight(id);
+  public Flight fetchFlight(@PathVariable("id") String id) {
+    return adminService.fetchFlight(id);
   }
 
   @DeleteMapping("flights/{id}")
-  public void deleteFlight(@PathVariable("id") int id) {
-    flightPlannerService.deleteFlight(id);
+  public void deleteFlight(@PathVariable("id") String id) {
+    adminService.deleteFlight(id);
   }
 }
