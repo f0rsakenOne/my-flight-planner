@@ -30,7 +30,7 @@ public class UserService {
     return flightsRepository.getSearchedFlights(searchFlight);
   }
 
-  public Flight fetchFlight(String id) {
+  public Flight fetchFlight(Integer id) {
     return flightsRepository.fetchFlight(id);
   }
 

@@ -33,12 +33,12 @@ public class AdminController {
   }
 
   @GetMapping("flights/{id}")
-  public Flight fetchFlight(@PathVariable("id") String id) {
+  public Flight fetchFlight(@PathVariable("id") Integer id) {
     return adminService.fetchFlight(id);
   }
 
   @DeleteMapping("flights/{id}")
-  public void deleteFlight(@PathVariable("id") String id) {
+  public void deleteFlight(@PathVariable("id") Integer id) {
     adminService.deleteFlight(id);
   }
 }

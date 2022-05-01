@@ -2,7 +2,7 @@ package com.example.myflightplanner.service;
 
 import com.example.myflightplanner.models.Flight;
 import com.example.myflightplanner.repository.FlightsRepository;
-import java.util.UUID;
+import java.util.Random;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -29,15 +29,15 @@ public class AdminService {
     flightsRepository.addFlight(flight);
   }
 
-  public String getNewId() {
-    return UUID.randomUUID().toString();
+  public Integer getNewId() {
+    return  new Random().nextInt();
   }
 
-  public Flight fetchFlight(String id) {
+  public Flight fetchFlight(Integer id) {
     return flightsRepository.fetchFlight(id);
   }
 
-  public void deleteFlight(String id) {
+  public void deleteFlight(Integer id) {
     flightsRepository.deleteFlight(id);
   }
 }

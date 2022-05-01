@@ -4,9 +4,8 @@ import com.example.myflightplanner.models.Airport;
 import com.example.myflightplanner.models.Flight;
 import com.example.myflightplanner.models.PageResult;
 import com.example.myflightplanner.models.SearchFlight;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.server.ResponseStatusException;
@@ -14,7 +13,7 @@ import org.springframework.web.server.ResponseStatusException;
 @Repository
 public class FlightsRepository {
 
-  List<Flight> flightList = Collections.synchronizedList(new ArrayList<>());
+  CopyOnWriteArrayList<Flight> flightList = new CopyOnWriteArrayList<>();
 
   public void clear() {
     flightList.clear();
@@ -30,13 +29,13 @@ public class FlightsRepository {
     return flightList.stream().anyMatch(flight::equals);
   }
 
-  public Flight fetchFlight(String id) {
+  public Flight fetchFlight(Integer id) {
     return flightList.stream().filter(flight -> flight.getId().equals(id)).findFirst()
         .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
   }
 
 
-  public  void deleteFlight(String id) {
+  public  void deleteFlight(Integer id) {
     flightList.removeIf(flight -> flight.getId().equals(id));
   }
 

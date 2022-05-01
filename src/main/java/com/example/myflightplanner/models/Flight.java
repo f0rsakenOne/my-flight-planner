@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 public class Flight {
 
-  private String id;
+  private Integer id;
   private Airport from;
   private Airport to;
   private String carrier;
@@ -16,7 +16,7 @@ public class Flight {
   @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
   private LocalDateTime arrivalTime;
 
-  public Flight(String id, Airport from, Airport to, String carrier,
+  public Flight(Integer id, Airport from, Airport to, String carrier,
       LocalDateTime departureTime, LocalDateTime arrivalTime) {
     this.id = id;
     this.from = from;
@@ -26,11 +26,11 @@ public class Flight {
     this.arrivalTime = arrivalTime;
   }
 
-  public String getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(String id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
