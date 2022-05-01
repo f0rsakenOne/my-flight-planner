@@ -41,7 +41,7 @@ public class UserController {
 
   @GetMapping("flights/{id}")
   @ResponseStatus(HttpStatus.OK)
-  public Flight fetchFlight(@PathVariable("id") String id) {
+  public Flight fetchFlight(@PathVariable("id") Integer id) {
     return userService.fetchFlight(id);
   }
 

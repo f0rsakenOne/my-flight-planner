@@ -38,7 +38,7 @@ public class AddFlightRequest {
     this.arrivalTime = arrivalTime;
   }
 
-  public Flight toDomain(String id) {
+  public Flight toDomain(Integer id) {
     return new Flight(id, from, to, carrier, LocalDateTime.parse(departureTime, formatter),
         LocalDateTime.parse(arrivalTime, formatter));
   }
