@@ -5,24 +5,24 @@ import com.example.myflightplanner.models.Flight;
 import com.example.myflightplanner.models.PageResult;
 import com.example.myflightplanner.models.SearchFlight;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import org.springframework.http.HttpStatus;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.server.ResponseStatusException;
 
 @Repository
 public class FlightsRepository {
 
-  List<Flight> flightList = new ArrayList<>();
+  List<Flight> flightList = Collections.synchronizedList(new ArrayList<>());
 
   public void clear() {
     flightList.clear();
   }
 
 
-  @Async
-  public void addFlight(Flight flight) {
+
+  public  void addFlight(Flight flight) {
     flightList.add(flight);
   }
 
@@ -35,8 +35,8 @@ public class FlightsRepository {
         .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
   }
 
-  @Async
-  public void deleteFlight(String id) {
+
+  public  void deleteFlight(String id) {
     flightList.removeIf(flight -> flight.getId().equals(id));
   }
 
