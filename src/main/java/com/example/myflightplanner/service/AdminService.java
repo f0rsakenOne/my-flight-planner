@@ -2,7 +2,6 @@ package com.example.myflightplanner.service;
 
 import com.example.myflightplanner.models.Flight;
 import com.example.myflightplanner.repository.FlightsRepository;
-import java.util.Random;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -30,7 +29,7 @@ public class AdminService {
   }
 
   public Integer getNewId() {
-    return  new Random().nextInt();
+    return (int) ((Math.random() * 9000000) + 1000000);
   }
 
   public Flight fetchFlight(Integer id) {
