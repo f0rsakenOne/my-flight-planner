@@ -2,11 +2,20 @@ package com.example.myflightplanner.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDateTime;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 
+@Entity
 public class Flight {
 
+  @GeneratedValue()
+  @Id
   private Integer id;
+  @JoinColumn(name = "from_id")
   private Airport from;
+  @JoinColumn(name = "to_id")
   private Airport to;
   private String carrier;
 
