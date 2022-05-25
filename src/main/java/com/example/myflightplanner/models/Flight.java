@@ -2,28 +2,52 @@ package com.example.myflightplanner.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDateTime;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
+@Entity
 public class Flight {
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO, generator = "flight_id_sequence")
+  @Column(name = "FLIGHT_ID")
   private Integer id;
+
+  @ManyToOne
+  @JoinColumn(name = "from_id")
   private Airport from;
+
+  @ManyToOne
+  @JoinColumn(name = "to_id")
   private Airport to;
+
+  @Column(name = "CARRIER")
   private String carrier;
 
+  @Column(name = "DEPARTURE_TIME")
   @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
   private LocalDateTime departureTime;
 
+  @Column(name = "ARRIVAL_TIME")
   @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
   private LocalDateTime arrivalTime;
 
-  public Flight(Integer id, Airport from, Airport to, String carrier,
+  public Flight(Airport from, Airport to, String carrier,
       LocalDateTime departureTime, LocalDateTime arrivalTime) {
-    this.id = id;
     this.from = from;
     this.to = to;
     this.carrier = carrier;
     this.departureTime = departureTime;
     this.arrivalTime = arrivalTime;
+  }
+
+  public Flight() {
+
   }
 
   public Integer getId() {

@@ -1,7 +1,10 @@
 package com.example.myflightplanner.models;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 
+@Entity
 public class Airport {
 
   @NotBlank
@@ -11,12 +14,17 @@ public class Airport {
   private String city;
 
   @NotBlank
+  @Id
   private String airport;
 
   public Airport(String country, String city, String airport) {
     this.country = country;
     this.city = city;
     this.airport = airport;
+  }
+
+  public Airport() {
+
   }
 
   public String getCountry() {
