@@ -56,6 +56,6 @@ public class AdminDatabaseImpl implements AdminService {
 
   @Override
   public void deleteFlight(Integer id) {
-    flightDatabaseRepository.deleteById(id);
+    flightDatabaseRepository.findById(id).ifPresent(flightDatabaseRepository::delete);
   }
 }
