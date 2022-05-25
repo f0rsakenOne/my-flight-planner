@@ -1,6 +1,6 @@
 --liquibase formatted sql
 
---changeset janis:4
+--changeset nikolajs:1
 
 CREATE TABLE airport
 (

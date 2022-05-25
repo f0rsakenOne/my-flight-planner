@@ -23,6 +23,10 @@ public class Airport {
     this.airport = airport;
   }
 
+  public Airport() {
+
+  }
+
   public String getCountry() {
     return country;
   }

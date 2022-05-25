@@ -27,7 +27,7 @@ public class AdminController {
   @PutMapping("flights")
   @ResponseStatus(HttpStatus.CREATED)
   public Flight addFlight(@Valid @RequestBody AddFlightRequest flightRequest) {
-    Flight flight = flightRequest.toDomain(adminService.getNewId());
+    Flight flight = flightRequest.toDomain();
     adminService.addFlight(flight);
     return flight;
   }
